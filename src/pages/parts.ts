@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import NavbarTemplate from './templates/NavbarTemplate';
-import LogoSVG from 'assets/logo.svg';
 
-export const Logo = styled(LogoSVG)`
-  width: 100px;
-`;
+export const Logo = styled.img``;
+
 export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;

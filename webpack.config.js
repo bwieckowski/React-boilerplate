@@ -40,16 +40,27 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: "babel-loader"
-          },
-          {
-            loader: "react-svg-loader",
+            loader: 'svg-url-loader',
             options: {
-              jsx: true // true outputs JSX tags
-            }
-          }
-        ]
-      }
+              limit: 10000,
+            },
+          },
+        ],
+      },
+      // If you would like ues SVG images as React Component use
+      //
+      //{
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: 'babel-loader'
+      //     },
+      //     {
+      //       loader: "react-svg-loader",
+      //       jsx: true,
+      //     }
+      //   ]
+      // }
     ],
   },
   devServer: {

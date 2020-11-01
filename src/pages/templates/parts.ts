@@ -4,6 +4,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
 
 
