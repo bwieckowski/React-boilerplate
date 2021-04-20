@@ -3,8 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = {
+var config = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
@@ -14,14 +15,6 @@ module.exports = {
       assets: path.resolve(__dirname, 'src/assets/'),
       // Here place your anouther paths
     }
-  },
-  entry: [
-    './src/index.tsx', // the entry point of our app
-  ],
-  output: {
-    path: path.join(__dirname, '/build'),
-    filename: 'bundle.min.js',
-    publicPath: '/'
   },
   module: {
     rules: [
@@ -63,16 +56,39 @@ module.exports = {
       // }
     ],
   },
-  devServer: {
-    historyApiFallback: true,
-  },
+  
+  // devServer: {
+  //   historyApiFallback: true,
+  // },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'src/index.html', }),
+    //new HtmlWebpackPlugin({ template: 'src/index.html', }),
     new MiniCssExtractPlugin(),
   ],
-  devtool: "source-map",
-  performance: {
-    hints: false,
-  },
+  // devtool: "source-map",
+  // performance: {
+  //   hints: false,
+  // },
 };
 
+var client = Object.assign({}, config, {
+    name: "client",
+    target: "web",
+    entry: path.resolve(__dirname, "src/client.tsx"),
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, "build")
+    }
+});
+
+var server = Object.assign({}, config, {
+    name: "server",
+    target: "node",
+    externals: [nodeExternals()],
+    entry: path.resolve(__dirname, "src/server.tsx"),
+    output: {
+        filename: "server.js",
+        path: path.resolve(__dirname, "build")
+    }
+});
+
+module.exports = [client, server];

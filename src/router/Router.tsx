@@ -1,13 +1,11 @@
 import React from 'react';
 import {
-  BrowserRouter,
   Switch,
   Route,
 } from "react-router-dom";
 import routes from './routes';
 
 const Router: React.FC = () => (
-  <BrowserRouter>
   <Switch>
     {
       routes.map((route, index) => (
@@ -17,7 +15,6 @@ const Router: React.FC = () => (
       ))
     }
   </Switch>
-  </BrowserRouter>
 )
 
 export default Router;

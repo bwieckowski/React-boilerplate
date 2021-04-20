@@ -1,6 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from "redux";
+import { BrowserRouter } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from 'redux-saga'
 import rootReducer from './store/rootReducer';
@@ -15,12 +17,15 @@ const store = createStore(rootReducer, composeWithDevTools(
 
 sagaMiddleware.run(rootSaga);
 
-function App() {
-  return (
-    <Provider store={store}>
-      <Router />
-    </Provider >
-  );
-}
+const App = () => (
+  <Provider store={store}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+  </Provider>
+)
 
-export default App;
+ReactDOM.hydrate(
+  <App/>,
+  document.getElementById('app')
+);
